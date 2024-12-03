@@ -1,0 +1,107 @@
+import io.invertase.gradle.common.PackageJson
+
+buildscript {
+  ext.getExtOrDefault = {name, version ->
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : version
+  }
+
+  // The Android Gradle plugin is only required when opening the android folder stand-alone.
+  // This avoids unnecessary downloads and potential conflicts when the library is included as a
+  // module dependency in an application project.
+  if (project == rootProject) {
+    repositories {
+      google()
+      mavenCentral()
+    }
+
+    dependencies {
+      classpath("com.android.tools.build:gradle:7.0.4")
+      classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion', '1.8.22')}"
+    }
+  } else {
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion', '1.8.22')}"
+    }
+  }
+}
+
+plugins {
+  id "io.invertase.gradle.build" version "1.5"
+}
+apply plugin: 'kotlin-android'
+
+def packageJson = PackageJson.getForProject(project)
+def googleMobileAdsVersion = packageJson['sdkVersions']['android']['googleMobileAds']
+def googleUmpVersion = packageJson['sdkVersions']['android']['googleUmp']
+def jsonMinSdk = packageJson['sdkVersions']['android']['minSdk']
+def jsonTargetSdk = packageJson['sdkVersions']['android']['targetSdk']
+def jsonCompileSdk = packageJson['sdkVersions']['android']['compileSdk']
+def jsonBuildTools = packageJson['sdkVersions']['android']['buildTools']
+def isNewArchitectureEnabled() {
+    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+}
+
+if (isNewArchitectureEnabled()) {
+    apply plugin: "com.facebook.react"
+}
+
+project.ext {
+  set('react-native', [
+    versions: [
+      android : [
+        minSdk    : jsonMinSdk,
+        targetSdk : jsonTargetSdk,
+        compileSdk: jsonCompileSdk,
+        // optional as gradle.buildTools comes with one by default
+        // overriding here though to match the version RN uses
+        buildTools: jsonBuildTools
+      ],
+
+      googleMobileAds: [
+        sdk: googleMobileAdsVersion,
+      ],
+
+      ads     : [
+        consent: googleUmpVersion,
+      ],
+    ],
+  ])
+}
+
+apply from: file("./app-json.gradle")
+
+android {
+  defaultConfig {
+    multiDexEnabled true
+    buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+  }
+  lintOptions {
+    disable 'GradleCompatible'
+    abortOnError false
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+repositories {
+  google()
+  mavenCentral()
+}
+
+dependencies {
+  implementation("com.google.android.gms:play-services-ads:${googleMobileAdsVersion}")
+  api "com.google.android.ump:user-messaging-platform:${googleUmpVersion}"
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3' // pushlog to slack
+}
+
+ReactNative.shared.applyPackageVersion()
+ReactNative.shared.applyDefaultExcludes()
+ReactNative.module.applyAndroidVersions()
+ReactNative.module.applyReactNativeDependency("api")
+

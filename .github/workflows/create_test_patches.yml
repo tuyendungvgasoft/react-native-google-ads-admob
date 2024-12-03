@@ -1,0 +1,117 @@
+name: 'Create Test Patches'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+      - 'website/**'
+      - '.spellcheck.dict.txt'
+      - '**/*.md'
+  pull_request:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+      - 'website/**'
+      - '.spellcheck.dict.txt'
+      - '**/*.md'
+
+jobs:
+  main:
+    name: Create patch-package Patches
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Future ideas:
+      # - make into an action, parameterize directories to pack, and package names to install
+      # - name patches w/PR as "semver prerelease" and SHA as "semver build info". Needs patch-package enhancement.
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "yarn-cache-dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - uses: actions/cache/restore@v4
+        name: Yarn Cache
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('package.json', 'RNGoogleMobileAdsExample/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Yarn Install
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 60
+          max_attempts: 3
+          command: DETOX_DISABLE_POSTINSTALL=1 yarn --no-audit --prefer-offline
+
+      - name: Create Patches
+        env:
+          # yarn3+ by default disables lockfile alteration in CI. We want it.
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+        run: |
+          export PACKAGE_NAME=`npx json name -f package.json`
+          export CLEAN_PACKAGE_NAME=`echo $PACKAGE_NAME | sed s/@// |sed s,/,-,`
+          mkdir $HOME/scratch
+          echo "Packing PR version of $CLEAN_PACKAGE_NAME"
+          yarn pack
+          mv *tgz $HOME/scratch
+          ls -la $HOME/scratch/*$CLEAN_PACKAGE_NAME*
+          cd $HOME
+          npx react-native init template --skip-install --skip-git-init
+          cd template
+          yarn
+          yarn add patch-package --dev
+          mkdir patches || true
+          echo "Installing $CLEAN_PACKAGE_NAME into fresh template app, then clobbering with PR version"
+          yarn add $PACKAGE_NAME
+          pushd node_modules/
+          tar -zxf $HOME/scratch/*$CLEAN_PACKAGE_NAME*-v*
+          mv react-native-google-mobile-ads/package.json package/
+          \rm -fr react-native-google-mobile-ads
+          mv package react-native-google-mobile-ads
+          # do some cleaning so the patch is minimal - TODO fix .npmignore/package.json files block
+          rm react-native-google-mobile-ads/CHANGELOG.md
+          rm react-native-google-mobile-ads/android/.npmignore
+          rm react-native-google-mobile-ads/ios/.npmignore
+          rm react-native-google-mobile-ads/ios/RNGoogleMobileAds.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+          rm react-native-google-mobile-ads/ios/RNGoogleMobileAds.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+          rm react-native-google-mobile-ads/ios/RNGoogleMobileAds.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+          rm react-native-google-mobile-ads/RNGoogleMobileAdsExample/android/gradle/wrapper/gradle-wrapper.jar
+          popd
+          npx patch-package $PACKAGE_NAME || true
+          ls -la $HOME/template/patches
+        shell: bash
+
+      - name: Upload Test Patches
+        uses: actions/upload-artifact@v4
+        with:
+          name: patches
+          path: ~/template/patches/
+
+      - uses: actions/cache/save@v4
+        name: Yarn Cache Save
+        if: "${{ github.ref == 'refs/heads/main' }}"
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.yarn-cache-dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('package.json', 'RNGoogleMobileAdsExample/package.json') }}
+
+      # create a comment on the PR and any related issues with a direct link to the archive,
+      # a call for testers, and perhaps a paste-able set of commands to install them
+      # (mkdir patches, curl -o etc, npx patch-package)
+      # You need an artifact id to get a download link for it.
+      # You need a workflow run id to get an artifact id.
+      # You need to list out all runs for a workflow and filter to get the run id.
+      # This action does all of that but needs a tweak to just kick out the URL instead of downloading:
+      # https://github.com/dawidd6/action-download-artifact/blob/master/main.js#L102
+      # Best strategy is to run this patch generator on pull_request
+      # Then run the issue commenter that dynamically de-references the artifact on workflow_run
+      # - name: Post Comment with Download Link
+      #   run: echo ${{ toJson(github) }}
