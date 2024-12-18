@@ -23,6 +23,7 @@ public class RNAdmobNativeViewManager extends ViewGroupManager<RNAdmobNativeView
 
     public static final String REACT_CLASS = "RNGADNativeView";
 
+    public static final String EVENT_AD_FAID = "onPaid";
     public static final String EVENT_AD_FAILED_TO_LOAD = "onAdFailedToLoad";
     public static final String EVENT_AD_CLICKED = "onAdClicked";
     public static final String EVENT_AD_CLOSED = "onAdClosed";
@@ -59,6 +60,7 @@ public class RNAdmobNativeViewManager extends ViewGroupManager<RNAdmobNativeView
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         MapBuilder.Builder<String, Object> builder = MapBuilder.builder();
         String[] events = new String[]{
+                EVENT_AD_FAID,
                 EVENT_AD_FAILED_TO_LOAD,
                 EVENT_AD_CLICKED,
                 EVENT_AD_CLOSED,

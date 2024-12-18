@@ -59,6 +59,14 @@ export class NativeAdView extends Component {
   _onAdOpened = event => {
     if (this.props.onAdOpened) this.props.onAdOpened(event.nativeEvent);
   };
+  _onPaid = event => {
+    if (this.props.onPaid)
+      this.props.onPaid({
+        currency: event.nativeEvent.currency,
+        precision: event.nativeEvent.precision,
+        value: event.nativeEvent.value,
+      });
+  };
 
   onNativeAdLoaded = event => {
     this.ad = event.nativeEvent;
@@ -134,6 +142,7 @@ export class NativeAdView extends Component {
           onAdOpened={this._onAdOpened}
           onAdClosed={this._onAdClosed}
           onAdImpression={this._onAdImpression}
+          onPaid={this._onPaid}
           style={this.props.style}
           mediaAspectRatio={AdOptions.mediaAspectRatio[this.props.mediaAspectRatio]}
           onNativeAdLoaded={this.onNativeAdLoaded}

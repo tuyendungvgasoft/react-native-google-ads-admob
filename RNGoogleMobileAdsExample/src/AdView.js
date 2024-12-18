@@ -63,12 +63,11 @@ export const AdView = React.memo(
       Logger(`AD ${(index + 1) / 6 || ''}`, 'CLICK', 'User has clicked the Ad');
     };
 
-    const onAdImpression = () => {
-      Logger(
-        `AD ${(index + 1) / 6 || ''}`,
-        'IMPRESSION',
-        'Ad impression recorded',
-      );
+    const onAdImpression = res => {
+      Logger(`AD ${(index + 1) / 6 || ''}`, 'IMPRESSION', res);
+    };
+    const onPaid = res => {
+      Logger(`AD ${(index + 1) / 6 || ''}`, 'onPaid', res);
     };
 
     const onNativeAdLoaded = event => {
@@ -98,6 +97,7 @@ export const AdView = React.memo(
         onAdLeftApplication={onAdLeftApplication}
         onAdClicked={onAdClicked}
         onAdImpression={onAdImpression}
+        onPaid={onPaid}
         onNativeAdLoaded={onNativeAdLoaded}
         refreshInterval={60000 * 2}
         style={{
@@ -111,11 +111,8 @@ export const AdView = React.memo(
           nativeBanner: true,
         }}
         // adUnitID={type === 'image' ? adUnitIDs.image : adUnitIDs.video} // REPLACE WITH NATIVE_AD_VIDEO_ID for video ads.
-        // repository={type === 'image' ? 'imageAd' : 'videoAd'}
-        adUnitID={
-          'ca-app-pub-5904408074441373/9807068871' ||
-          'ca-app-pub-3940256099942544/2247696110'
-        }>
+        repository={type === 'image' ? 'imageAd' : 'videoAd'}
+        adUnitID="ca-app-pub-3940256099942544/2247696110">
         <View
           style={{
             width: '100%',
