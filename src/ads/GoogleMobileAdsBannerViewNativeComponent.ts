@@ -4,6 +4,7 @@ import type { BubblingEventHandler, Float } from 'react-native/Libraries/Types/C
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 
+
 export type NativeEvent = {
   type: string;
   width?: Float;
