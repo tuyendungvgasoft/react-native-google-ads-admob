@@ -30,6 +30,10 @@ import com.google.android.gms.ads.nativead.NativeAdOptions;
 import com.google.android.gms.ads.nativead.NativeAdView;
 import com.google.android.gms.ads.AdValue;
 import com.google.android.gms.ads.OnPaidEventListener;
+import com.google.android.gms.ads.ResponseInfo;
+import com.google.android.gms.ads.AdapterResponseInfo;
+import android.os.Bundle;
+
 
 
 import java.lang.reflect.Method;
@@ -260,6 +264,32 @@ public class RNAdmobNativeView extends LinearLayout {
                     payload.putDouble("value", 1e-6 * adValue.getValueMicros());
                     payload.putDouble("precision", adValue.getPrecisionType());
                     payload.putString("currency", adValue.getCurrencyCode());
+
+                    ResponseInfo responseInfo = nativeAd.getResponseInfo();
+                    AdapterResponseInfo loadedAdapterInfo = responseInfo.getLoadedAdapterResponseInfo();
+                    WritableMap loadedAdapterMap = Arguments.createMap();
+                    if (loadedAdapterInfo != null) {
+                        loadedAdapterMap.putString("Adapter", loadedAdapterInfo.getAdapterClassName());
+                        loadedAdapterMap.putDouble("Latency", loadedAdapterInfo.getLatencyMillis());
+                        loadedAdapterMap.putString("Ad Source Name", loadedAdapterInfo.getAdSourceName());
+                        loadedAdapterMap.putString("Ad Source ID", loadedAdapterInfo.getAdSourceId());
+                        loadedAdapterMap.putString("Ad Source Instance Name", loadedAdapterInfo.getAdSourceInstanceName());
+                        loadedAdapterMap.putString("Ad Source Instance ID", loadedAdapterInfo.getAdSourceInstanceId());
+                        
+                        Bundle credentials = loadedAdapterInfo.getCredentials();
+                        if (credentials != null) {
+                            WritableMap credentialsMap = Arguments.createMap();
+                            for (String key : credentials.keySet()) {
+                                credentialsMap.putString(key, credentials.getString(key));
+                            }
+                            loadedAdapterMap.putMap("Credentials", credentialsMap);
+                        }
+
+                      
+                    }
+
+                    payload.putMap("responseInfo", loadedAdapterMap);
+
                     sendEvent(RNAdmobNativeViewManager.EVENT_AD_FAID, payload);
                 }
             });

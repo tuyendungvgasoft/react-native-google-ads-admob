@@ -41,6 +41,11 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.OnPaidEventListener;
 import com.google.android.gms.ads.admanager.AdManagerAdView;
 import com.google.android.gms.ads.admanager.AppEventListener;
+
+import com.google.android.gms.ads.ResponseInfo;
+import com.google.android.gms.ads.AdapterResponseInfo;
+import android.os.Bundle;
+
 import io.invertase.googlemobileads.common.ReactNativeAdView;
 import io.invertase.googlemobileads.common.SharedUtils;
 import java.util.ArrayList;
@@ -201,6 +206,33 @@ public class ReactNativeGoogleMobileAdsBannerAdViewManager
             payload.putDouble("value", 1e-6 * adValue.getValueMicros());
             payload.putDouble("precision", adValue.getPrecisionType());
             payload.putString("currency", adValue.getCurrencyCode());
+
+            ResponseInfo responseInfo = adView.getResponseInfo();
+            AdapterResponseInfo loadedAdapterInfo = responseInfo.getLoadedAdapterResponseInfo();
+            WritableMap loadedAdapterMap = Arguments.createMap();
+            if (loadedAdapterInfo != null) {
+                loadedAdapterMap.putString("Adapter", loadedAdapterInfo.getAdapterClassName());
+                loadedAdapterMap.putDouble("Latency", loadedAdapterInfo.getLatencyMillis());
+                loadedAdapterMap.putString("Ad Source Name", loadedAdapterInfo.getAdSourceName());
+                loadedAdapterMap.putString("Ad Source ID", loadedAdapterInfo.getAdSourceId());
+                loadedAdapterMap.putString("Ad Source Instance Name", loadedAdapterInfo.getAdSourceInstanceName());
+                loadedAdapterMap.putString("Ad Source Instance ID", loadedAdapterInfo.getAdSourceInstanceId());
+                
+                Bundle credentials = loadedAdapterInfo.getCredentials();
+                if (credentials != null) {
+                    WritableMap credentialsMap = Arguments.createMap();
+                    for (String key : credentials.keySet()) {
+                        credentialsMap.putString(key, credentials.getString(key));
+                    }
+                    loadedAdapterMap.putMap("Credentials", credentialsMap);
+                }
+
+              
+            }
+
+            payload.putMap("responseInfo", loadedAdapterMap);
+
+
             sendEvent(reactViewGroup, EVENT_PAID, payload);
           }
         });

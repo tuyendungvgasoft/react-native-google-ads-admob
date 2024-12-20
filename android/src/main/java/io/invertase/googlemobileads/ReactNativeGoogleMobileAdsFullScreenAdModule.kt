@@ -156,6 +156,39 @@ abstract class ReactNativeGoogleMobileAdsFullScreenAdModule<T>(
           payload.putDouble("value", 1e-6 * adValue.getValueMicros());
           payload.putDouble("precision", 1.0 * adValue.getPrecisionType());
           payload.putString("currency", adValue.getCurrencyCode());
+
+          val responseInfo = when (ad) {
+              is AdManagerInterstitialAd -> ad.responseInfo
+              is AppOpenAd -> ad.responseInfo
+              is RewardedAd -> ad.responseInfo
+              is RewardedInterstitialAd -> ad.responseInfo
+              else -> null
+          }
+          if (responseInfo != null) {
+            val loadedAdapterInfo = responseInfo.loadedAdapterResponseInfo
+            val loadedAdapterMap = Arguments.createMap()
+
+            if (loadedAdapterInfo != null) {
+                loadedAdapterMap.putString("Adapter", loadedAdapterInfo.adapterClassName)
+                loadedAdapterMap.putDouble("Latency", loadedAdapterInfo.latencyMillis.toDouble())
+                loadedAdapterMap.putString("Ad Source Name", loadedAdapterInfo.adSourceName)
+                loadedAdapterMap.putString("Ad Source ID", loadedAdapterInfo.adSourceId)
+                loadedAdapterMap.putString("Ad Source Instance Name", loadedAdapterInfo.adSourceInstanceName)
+                loadedAdapterMap.putString("Ad Source Instance ID", loadedAdapterInfo.adSourceInstanceId)
+
+                val credentials = loadedAdapterInfo.credentials
+                if (credentials != null) {
+                    val credentialsMap = Arguments.createMap()
+                    for (key in credentials.keySet()) {
+                        credentialsMap.putString(key, credentials.getString(key))
+                    }
+                    loadedAdapterMap.putMap("Credentials", credentialsMap)
+                }
+            }
+
+            payload.putMap("responseInfo", loadedAdapterMap)
+          }
+
           sendAdEvent(
             ReactNativeGoogleMobileAdsEvent.GOOGLE_MOBILE_ADS_EVENT_PAID,
             requestId,

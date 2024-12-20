@@ -52,6 +52,9 @@ class AppOpenTest implements Test {
       if (type === AdEventType.ERROR) {
         console.log(`${Platform.OS} app open error: ${payload?.message}`);
       }
+      if (type === AdEventType.PAID) {
+        console.log(`${Platform.OS} app open paid:`, payload);
+      }
       if (type === AdEventType.LOADED) {
         this.adLoaded = true;
       }
@@ -126,6 +129,9 @@ class InterstitialTest implements Test {
       }
       if (type === AdEventType.ERROR) {
         console.log(`${Platform.OS} interstitial error: ${payload?.message}`);
+      }
+      if (type === AdEventType.PAID) {
+        console.log(`${Platform.OS} app open paid:`, payload);
       }
       if (type === AdEventType.LOADED) {
         this.adLoaded = true;
@@ -220,6 +226,7 @@ class BannerTest implements Test {
                 RevenuePrecisions[event.precision]
               }})`,
             );
+            console.log('responseInfo',event.responseInfo);
           }}
         />
         <Button

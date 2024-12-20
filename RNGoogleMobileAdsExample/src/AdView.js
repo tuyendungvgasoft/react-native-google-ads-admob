@@ -111,7 +111,7 @@ export const AdView = React.memo(
           nativeBanner: true,
         }}
         // adUnitID={type === 'image' ? adUnitIDs.image : adUnitIDs.video} // REPLACE WITH NATIVE_AD_VIDEO_ID for video ads.
-        repository={type === 'image' ? 'imageAd' : 'videoAd'}
+        // repository={type === 'image' ? 'imageAd' : 'videoAd'}
         adUnitID="ca-app-pub-3940256099942544/2247696110">
         <View
           style={{

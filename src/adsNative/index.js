@@ -65,6 +65,7 @@ export class NativeAdView extends Component {
         currency: event.nativeEvent.currency,
         precision: event.nativeEvent.precision,
         value: event.nativeEvent.value,
+        responseInfo: event.nativeEvent.responseInfo,
       });
   };
 

@@ -39,7 +39,6 @@ export const BaseAd = React.forwardRef<
   const debouncedSetDimensions = debounce(setDimensions, 100);
 
   useEffect(() => {
-    console.log('Chạy vào đây BaseAs');
     if (!unitId) {
       throw new Error("BannerAd: 'unitId' expected a valid string unit ID.");
     }
@@ -90,6 +89,7 @@ export const BaseAd = React.forwardRef<
           currency: string;
           precision: RevenuePrecisions;
           value: number;
+          responseInfo: any;
         };
     const { type } = nativeEvent;
 
@@ -122,6 +122,7 @@ export const BaseAd = React.forwardRef<
               currency: nativeEvent.currency,
               precision: nativeEvent.precision,
               value: nativeEvent.value,
+              responseInfo: nativeEvent.responseInfo,
             });
           }
           break;
