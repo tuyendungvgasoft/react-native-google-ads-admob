@@ -89,7 +89,15 @@ export const BaseAd = React.forwardRef<
           currency: string;
           precision: RevenuePrecisions;
           value: number;
-          responseInfo: any;
+          responseInfo?: {
+            Adapter: string;
+            Latency: number;
+            'Ad Source Name': string;
+            'Ad Source ID': string;
+            'Ad Source Instance Name': string;
+            'Ad Source Instance ID': string;
+            Credentials?: Record<string, string>;
+          };
         };
     const { type } = nativeEvent;
 
