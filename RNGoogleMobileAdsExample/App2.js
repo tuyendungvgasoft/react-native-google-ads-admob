@@ -20,21 +20,20 @@ const App = () => {
 
   useEffect(() => {
     const init = async () => {
-      const res = await AdManager.setRequestConfiguration({
-        testDeviceIds: ['9556a25b632ea4ca'],
-      });
-
-      // console.log('setRequestConfiguration', JSON.stringify(res, null, 2));
+      console.log("=========== step1");
 
       const isTest = await AdManager.isTestDevice();
-      const test = await AdManager.getDeviceId();
-      console.log('isTestDevice', test, isTest);
-
+      console.log("=========== step2");
+      
+      console.log('isTestDevice', isTest);
+      console.log("=========== step4");
       setLoading(false);
     };
 
     init();
   }, []);
+
+  console.log("Hello World **********************************");
 
   return (
     <SafeAreaView
