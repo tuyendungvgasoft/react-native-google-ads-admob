@@ -3,6 +3,8 @@ import { AdOptions } from "./utils";
 
 const RNAdmobNativeAdsManager = NativeModules.RNAdmobNativeAdsManager;
 
+console.log("=======RNAdmobNativeAdsManager============",RNAdmobNativeAdsManager);
+
 async function setRequestConfiguration(config) {
   return RNAdmobNativeAdsManager.setRequestConfiguration(config);
 }

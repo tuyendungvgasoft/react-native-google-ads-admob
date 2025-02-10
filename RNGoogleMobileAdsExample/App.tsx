@@ -1030,8 +1030,10 @@ TestRegistry.registerTest(new GAMInterstitialTest());
 TestRegistry.registerTest(new DebugMenuTest());
 
 const App = () => {
+
+  console.log('Hello everyone');
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: 'white'}}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <TestRunner />
       </ScrollView>
