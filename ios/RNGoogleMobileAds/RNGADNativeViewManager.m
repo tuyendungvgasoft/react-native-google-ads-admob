@@ -12,6 +12,7 @@
 + (NSString *)  EVENT_AD_LOADED{return @"onAdLoaded";}
 + (NSString *)  EVENT_AD_LEFT_APPLICATION {return @"onAdLeftApplication";}
 + (NSString *)  EVENT_UNIFIED_NATIVE_AD_LOADED {return@ "onUnifiedNativeAdLoaded";}
++ (NSString *)  EVENT_AD_PAID {return@ "onPaid";}
 
 RCT_EXPORT_MODULE(RNGADNativeView);
 
@@ -71,7 +72,6 @@ RCT_EXPORT_VIEW_PROPERTY(onAdLeftApplication, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onAdClicked, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onAdImpression, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onNativeAdLoaded, RCTDirectEventBlock)
-
-
+RCT_EXPORT_VIEW_PROPERTY(onPaid, RCTDirectEventBlock)
 
 @end

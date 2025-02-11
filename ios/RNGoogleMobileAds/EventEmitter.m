@@ -33,6 +33,7 @@ static EventEmitter *_sharedInstance = nil;
         @"onAdClosed",
         @"onAdOpened",
         @"onAdImpression",
+        @"onPaid",
         @"onAdLoaded",
         @"onAdLeftApplication",
         @"onUnifiedNativeAdLoaded"

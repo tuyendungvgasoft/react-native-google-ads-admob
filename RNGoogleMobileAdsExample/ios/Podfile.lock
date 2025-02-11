@@ -1,11 +1,18 @@
 PODS:
   - boost (1.83.0)
   - DoubleConversion (1.1.6)
+  - FBAudienceNetwork (6.16.0)
   - FBLazyVector (0.74.1)
   - fmt (9.1.0)
   - glog (0.3.5)
   - Google-Mobile-Ads-SDK (11.10.0):
     - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleMobileAdsMediationFacebook (6.16.0.0):
+    - FBAudienceNetwork (= 6.16.0)
+    - Google-Mobile-Ads-SDK (~> 11.0)
+  - GoogleMobileAdsMediationVungle (7.4.4.0):
+    - Google-Mobile-Ads-SDK (~> 11.0)
+    - VungleAds (= 7.4.4)
   - GoogleUserMessagingPlatform (2.6.0)
   - hermes-engine (0.74.1):
     - hermes-engine/Pre-built (= 0.74.1)
@@ -1195,6 +1202,7 @@ PODS:
   - RNVectorIcons (9.2.0):
     - React-Core
   - SocketRocket (0.7.0)
+  - VungleAds (7.4.4)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1203,6 +1211,8 @@ DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - GoogleMobileAdsMediationFacebook
+  - GoogleMobileAdsMediationVungle
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - Jet (from `../node_modules/jet`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -1260,9 +1270,13 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - FBAudienceNetwork
     - Google-Mobile-Ads-SDK
+    - GoogleMobileAdsMediationFacebook
+    - GoogleMobileAdsMediationVungle
     - GoogleUserMessagingPlatform
     - SocketRocket
+    - VungleAds
 
 EXTERNAL SOURCES:
   boost:
@@ -1384,10 +1398,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
+  FBAudienceNetwork: d1670939884e3a2e0ad98dca98d7e0c841417228
   FBLazyVector: 898d14d17bf19e2435cafd9ea2a1033efe445709
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   Google-Mobile-Ads-SDK: 13e6e98edfd78ad8d8a791edb927658cc260a56f
+  GoogleMobileAdsMediationFacebook: 234b9cecc2f9c751567a71d035974c00e6803777
+  GoogleMobileAdsMediationVungle: d090c301d492c458986c447972808c8d9efc1439
   GoogleUserMessagingPlatform: 0c3a08353e53ce8c2feab7addd0b652cde522450
   hermes-engine: 16b8530de1b383cdada1476cf52d1b52f0692cbc
   Jet: 423274a1def279114bb142cb18e7ebd11977bc89
@@ -1441,8 +1458,9 @@ SPEC CHECKSUMS:
   RNGoogleMobileAds: 02e7962cc6aff8b379f534a5e71ce5e1857216e7
   RNVectorIcons: 5784330be9dddb5474e8b378d5f6947996c84e55
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  VungleAds: 7ceb822f20a6619d8d9ed6a616dacd8cc5b05036
   Yoga: 348f8b538c3ed4423eb58a8e5730feec50bce372
 
-PODFILE CHECKSUM: f699c82614f0340e3985855a1efdaa77a260037e
+PODFILE CHECKSUM: 177b730ffc1bf915ed53463a483815bdf2d50bec
 
 COCOAPODS: 1.16.2

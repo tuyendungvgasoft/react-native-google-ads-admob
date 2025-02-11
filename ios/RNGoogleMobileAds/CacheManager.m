@@ -21,6 +21,7 @@
 + (NSString *)EVENT_AD_OPEN:(NSString *)name { return [@"onAdPreloadOpen" stringByAppendingString:[@":" stringByAppendingString:name]]; }
 + (NSString *)EVENT_AD_CLICKED:(NSString *)name { return [@"onAdPreloadClicked" stringByAppendingString:[@":" stringByAppendingString:name]]; }
 + (NSString *)EVENT_AD_IMPRESSION:(NSString *)name { return [@"onAdPreloadImpression" stringByAppendingString:[@":" stringByAppendingString:name]]; }
++ (NSString *)EVENT_AD_PAID:(NSString *)name { return [@"onAdPreloadPaid" stringByAppendingString:[@":" stringByAppendingString:name]]; }
 
 static CacheManager *_sharedInstance = nil;
 

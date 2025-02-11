@@ -45,6 +45,7 @@ GADNativeAdDelegate>
 @property (nonatomic, copy) RCTDirectEventBlock onAdLeftApplication;
 @property (nonatomic, copy) RCTDirectEventBlock onAdClicked;
 @property (nonatomic, copy) RCTDirectEventBlock onAdImpression;
+@property (nonatomic, copy) RCTDirectEventBlock onPaid;
 @property (nonatomic, copy) RCTDirectEventBlock onNativeAdLoaded;
 
 @property (nonatomic, assign) BOOL isLoading;

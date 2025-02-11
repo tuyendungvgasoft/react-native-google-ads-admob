@@ -12,4 +12,5 @@
 + (NSString*)  EVENT_AD_LOADED;
 + (NSString*)  EVENT_AD_LEFT_APPLICATION ;
 + (NSString*)  EVENT_UNIFIED_NATIVE_AD_LOADED;
++ (NSString*)  EVENT_AD_PAID;
 @end

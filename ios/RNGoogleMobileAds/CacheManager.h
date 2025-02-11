@@ -21,6 +21,7 @@
 + (NSString *)EVENT_AD_OPEN:(NSString *)name;
 + (NSString *)EVENT_AD_CLICKED:(NSString *)name;
 + (NSString *)EVENT_AD_IMPRESSION:(NSString *)name;
++ (NSString *)EVENT_AD_PAID:(NSString *)name;
 
 
 -(BOOL) isLoading:(NSString*) id;

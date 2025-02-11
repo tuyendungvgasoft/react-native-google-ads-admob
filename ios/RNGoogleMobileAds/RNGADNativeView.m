@@ -630,6 +630,11 @@ BOOL *nonPersonalizedAds;
          }
 
          self.onNativeAdLoaded(dic);
+        // Gắn sự kiện trả tiền quảng cáo
+        __weak typeof(self) weakSelf = self;
+        nativeAd.paidEventHandler = ^(GADAdValue *adValue) {
+            [weakSelf onAdPaid:adValue];
+        };
 
      }
 }
@@ -665,6 +670,7 @@ BOOL *nonPersonalizedAds;
     if (self.onAdImpression) {
         self.onAdImpression(@{});
     }
+    NSLog(@"[RNAdMob] EVENT_AD_IMPRESSION sent to JS3");
     [EventEmitter.sharedInstance sendEvent:RNGADNativeViewManager.EVENT_AD_IMPRESSION dict:nil];
 }
 
@@ -714,4 +720,38 @@ BOOL *nonPersonalizedAds;
       }
 
 }
+// Hàm xử lý khi có dữ liệu doanh thu từ quảng cáo
+- (void)onAdPaid:(nonnull GADAdValue *)adValue {
+    // Lấy thông tin responseInfo
+    GADResponseInfo *responseInfo = self.nativeAd.responseInfo;
+    // Lấy thông tin từ loadedAdNetworkResponseInfo
+    GADAdNetworkResponseInfo *adNetworkInfo = responseInfo.loadedAdNetworkResponseInfo;
+    NSDictionary *responseInfoDict = @{
+        @"Adapter": adNetworkInfo.adNetworkClassName ?: [NSNull null],
+        @"Latency": @(adNetworkInfo.latency ?: 0.0),
+        @"Ad Source ID": adNetworkInfo.adSourceID ?: [NSNull null],
+        @"Ad Source Name": adNetworkInfo.adSourceName ?: [NSNull null],
+        @"Ad Source Instance Name": adNetworkInfo.adSourceInstanceName ?: [NSNull null]
+    };
+
+    if (self.onPaid) {
+        self.onPaid(@{
+            @"value": adValue.value ?: @(0),  
+            @"currency": adValue.currencyCode,  
+            @"precision": @(adValue.precision),
+            @"responseInfo": responseInfoDict
+        });
+    }
+
+    // Gửi sự kiện qua EventEmitter để React Native có thể nhận được
+  [EventEmitter.sharedInstance sendEvent:RNGADNativeViewManager.EVENT_AD_PAID
+                                      dict:@{
+                                          @"value": adValue.value ?: @(0),
+                                          @"currency": adValue.currencyCode,
+                                          @"precision": @(adValue.precision),
+                                          @"responseInfo": responseInfoDict
+                                    }];
+}
+
+
 @end

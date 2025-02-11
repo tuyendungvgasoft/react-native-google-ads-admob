@@ -3,14 +3,12 @@ import { AdOptions } from "./utils";
 
 const RNAdmobNativeAdsManager = NativeModules.RNAdmobNativeAdsManager;
 
-console.log("=======RNAdmobNativeAdsManager============",RNAdmobNativeAdsManager);
-
 async function setRequestConfiguration(config) {
   return RNAdmobNativeAdsManager.setRequestConfiguration(config);
 }
 
 async function openAdInspector() {
-  return RNAdmobNativeAdsManager.startInspector();
+  return RNAdmobNativeAdsManager.openAdInspector();
 }
 
 async function openDebugMenu(adUnitId) {

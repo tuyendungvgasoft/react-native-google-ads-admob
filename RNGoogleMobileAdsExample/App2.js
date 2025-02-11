@@ -9,7 +9,7 @@ import {
   View,
   NativeModules,
 } from 'react-native';
-import {AdManager} from 'react-native-google-ads-admob';
+import MobileAds, {AdManager} from 'react-native-google-ads-admob';
 import {AdView} from './src/AdView';
 import List from './src/List';
 import {routes} from './src/utils';
@@ -27,6 +27,7 @@ const App = () => {
       
       console.log('isTestDevice', isTest);
       console.log("=========== step4");
+      MobileAds().initialize().then(res => console.log("initialize Ads",res)).catch(console.error);
       setLoading(false);
     };
 
