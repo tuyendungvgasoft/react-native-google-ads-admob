@@ -46,9 +46,6 @@ class AppOpenTest implements Test {
     // Current no way in jet-next to re-render on async completion or to delay render? But still can log it
     this.adListener = appOpen.addAdEventsListener(({type, payload}) => {
       console.log(`${Platform.OS} app open ad event: ${type}`);
-      if (type === AdEventType.PAID) {
-        console.log(payload);
-      }
       if (type === AdEventType.ERROR) {
         console.log(`${Platform.OS} app open error: ${payload?.message}`);
       }
@@ -222,11 +219,9 @@ class BannerTest implements Test {
           size={this.bannerAdSize}
           onPaid={(event: PaidEvent) => {
             console.log(
-              `Paid: ${event.value} ${event.currency} (precision ${
-                RevenuePrecisions[event.precision]
-              }})`,
+              `Paid: ${event.value} ${event.currency} (precision ${event.precision}})`,
             );
-            console.log('responseInfo',event.responseInfo);
+            console.log('responseInfo', event.responseInfo);
           }}
         />
         <Button
@@ -270,6 +265,12 @@ class CollapsibleBannerTest implements Test {
             networkExtras: {
               collapsible: 'top',
             },
+          }}
+          onPaid={(event: PaidEvent) => {
+            console.log(
+              `Paid: ${event.value} ${event.currency} (precision ${event.precision}})`,
+            );
+            console.log('responseInfo', event.responseInfo);
           }}
         />
       </View>
@@ -963,7 +964,7 @@ class GAMInterstitialTest implements Test {
 class DebugMenuTest implements Test {
   constructor() {
     // Android requires SDK initialization before opening the Debug Menu
-    Platform.OS === 'android' && MobileAds().initialize().catch(console.error);
+    Platform.OS === 'android' && MobileAds().initialize().then(res => console.log("initialize", res)).catch(console.error);
   }
 
   getPath(): string {
@@ -1030,12 +1031,22 @@ TestRegistry.registerTest(new GAMInterstitialTest());
 TestRegistry.registerTest(new DebugMenuTest());
 
 const App = () => {
+  useEffect(() => {
+    const init = async () => {
+      MobileAds()
+        .initialize()
+        .then(res => console.log('initialize Ads', res))
+        .catch(console.error);
+    };
+    init();
+  }, []);
 
-  console.log('Hello everyone');
   return (
     <SafeAreaView style={{backgroundColor: 'white'}}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <TestRunner />
+        <View style={{width: "80%"}}>
+          <TestRunner /> 
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

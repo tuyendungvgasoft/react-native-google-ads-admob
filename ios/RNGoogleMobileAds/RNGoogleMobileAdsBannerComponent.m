@@ -121,11 +121,23 @@
   _banner.paidEventHandler = ^(GADAdValue *_Nonnull value) {
     typeof(self) strongSelf = weakSelf;
     if (strongSelf) {
+      
+      GADResponseInfo *responseInfo = strongSelf->_banner.responseInfo;
+      GADAdNetworkResponseInfo *adNetworkInfo = responseInfo.loadedAdNetworkResponseInfo;
+
+      NSDictionary *responseInfoDict = @{
+          @"Adapter": adNetworkInfo.adNetworkClassName ?: [NSNull null],
+          @"Latency": @(adNetworkInfo.latency ?: 0.0),
+          @"Ad Source ID": adNetworkInfo.adSourceID ?: [NSNull null],
+          @"Ad Source Name": adNetworkInfo.adSourceName ?: [NSNull null],
+          @"Ad Source Instance Name": adNetworkInfo.adSourceInstanceName ?: [NSNull null]
+      };
       [strongSelf sendEvent:@"onPaid"
                     payload:@{
                       @"value" : value.value,
                       @"precision" : @(value.precision),
                       @"currency" : value.currencyCode,
+                      @"responseInfo": responseInfoDict,
                     }];
     }
   };
