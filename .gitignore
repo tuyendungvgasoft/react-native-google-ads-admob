@@ -551,7 +551,6 @@ google-services.json
 GoogleService-Info.plist
 
 # generated files
-src/version.ts
 RNFBVersion.m
 ReactNativeFirebaseVersion.java
 
