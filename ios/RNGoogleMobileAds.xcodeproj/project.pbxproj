@@ -15,6 +15,14 @@
 		8B4E497E2301BE2C00587275 /* RNGoogleMobileInterstitialDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4E497D2301BE2C00587275 /* RNGoogleMobileInterstitialDelegate.m */; };
 		8BC10E6223029CAE00209FF9 /* RNGoogleMobileRewardedDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC10E6123029CAE00209FF9 /* RNGoogleMobileRewardedDelegate.m */; };
 		994962B72327EA3C003D5C80 /* RNGoogleMobileBannerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 994962B62327EA3C003D5C80 /* RNGoogleMobileBannerViewManager.m */; };
+
+		419B6BD026D6286900C5A077 /* RNGADNativeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 419B6BC226D6286700C5A077 /* RNGADNativeView.m */; };
+		419B6BD126D6286900C5A077 /* RNGADMediaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 419B6BC426D6286800C5A077 /* RNGADMediaView.m */; };
+		419B6BD226D6286900C5A077 /* RNGADImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 419B6BC626D6286800C5A077 /* RNGADImageView.m */; };
+		419B6BD326D6286900C5A077 /* RNAdmobNativeAdsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 419B6BC726D6286800C5A077 /* RNAdmobNativeAdsManager.m */; };
+		419B6BD426D6286900C5A077 /* RNGADNativeViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 419B6BC926D6286800C5A077 /* RNGADNativeViewManager.m */; };
+		419B6BD526D6286900C5A077 /* RNNativeAdMobUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 419B6BCB26D6286800C5A077 /* RNNativeAdMobUtils.m */; };
+		419B6BD626D6286900C5A077 /* RNGADMediaViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 419B6BCD26D6286800C5A077 /* RNGADMediaViewManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +55,22 @@
 		8BC10E6123029CAE00209FF9 /* RNGoogleMobileRewardedDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNGoogleMobileRewardedDelegate.m; sourceTree = "<group>"; };
 		994962B52327EA31003D5C80 /* RNGoogleMobileBannerViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNGoogleMobileBannerViewManager.h; sourceTree = "<group>"; };
 		994962B62327EA3C003D5C80 /* RNGoogleMobileBannerViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNGoogleMobileBannerViewManager.m; sourceTree = "<group>"; };
+
+		419B6BC226D6286700C5A077 /* RNGADNativeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGADNativeView.m; sourceTree = "<group>"; };
+		419B6BC326D6286800C5A077 /* RNGADNativeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGADNativeView.h; sourceTree = "<group>"; };
+		419B6BC426D6286800C5A077 /* RNGADMediaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGADMediaView.m; sourceTree = "<group>"; };
+		419B6BC526D6286800C5A077 /* RNAdmobNativeAdsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAdmobNativeAdsManager.h; sourceTree = "<group>"; };
+		419B6BC626D6286800C5A077 /* RNGADImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGADImageView.m; sourceTree = "<group>"; };
+		419B6BC726D6286800C5A077 /* RNAdmobNativeAdsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAdmobNativeAdsManager.m; sourceTree = "<group>"; };
+		419B6BC826D6286800C5A077 /* RNGADMediaViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGADMediaViewManager.h; sourceTree = "<group>"; };
+		419B6BC926D6286800C5A077 /* RNGADNativeViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGADNativeViewManager.m; sourceTree = "<group>"; };
+		419B6BCA26D6286800C5A077 /* RNGADImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGADImageView.h; sourceTree = "<group>"; };
+		419B6BCB26D6286800C5A077 /* RNNativeAdMobUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNativeAdMobUtils.m; sourceTree = "<group>"; };
+		419B6BCC26D6286800C5A077 /* RNGADMediaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGADMediaView.h; sourceTree = "<group>"; };
+		419B6BCD26D6286800C5A077 /* RNGADMediaViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGADMediaViewManager.m; sourceTree = "<group>"; };
+		419B6BCE26D6286800C5A077 /* RNGADNativeViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGADNativeViewManager.h; sourceTree = "<group>"; };
+		419B6BCF26D6286900C5A077 /* RNNativeAdMobUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNativeAdMobUtils.h; sourceTree = "<group>"; };
+		A96DA7741C146D7200FC639B /* libRNAdMobManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNAdMobManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +111,20 @@
 				8BC10E6123029CAE00209FF9 /* RNGoogleMobileRewardedDelegate.m */,
 				994962B52327EA31003D5C80 /* RNGoogleMobileBannerViewManager.h */,
 				994962B62327EA3C003D5C80 /* RNGoogleMobileBannerViewManager.m */,
+				419B6BC526D6286800C5A077 /* RNAdmobNativeAdsManager.h */,
+				419B6BC726D6286800C5A077 /* RNAdmobNativeAdsManager.m */,
+				419B6BCA26D6286800C5A077 /* RNGADImageView.h */,
+				419B6BC626D6286800C5A077 /* RNGADImageView.m */,
+				419B6BCC26D6286800C5A077 /* RNGADMediaView.h */,
+				419B6BC426D6286800C5A077 /* RNGADMediaView.m */,
+				419B6BC826D6286800C5A077 /* RNGADMediaViewManager.h */,
+				419B6BCD26D6286800C5A077 /* RNGADMediaViewManager.m */,
+				419B6BC326D6286800C5A077 /* RNGADNativeView.h */,
+				419B6BC226D6286700C5A077 /* RNGADNativeView.m */,
+				419B6BCE26D6286800C5A077 /* RNGADNativeViewManager.h */,
+				419B6BC926D6286800C5A077 /* RNGADNativeViewManager.m */,
+				419B6BCF26D6286900C5A077 /* RNNativeAdMobUtils.h */,
+				419B6BCB26D6286800C5A077 /* RNNativeAdMobUtils.m */,
 			);
 			path = RNGoogleMobile;
 			sourceTree = "<group>";
@@ -166,6 +204,13 @@
 				8B06D41F230063ED00A5B542 /* RNGoogleMobileCommon.m in Sources */,
 				2744B98621F45429004F8E3F /* RNGoogleMobileModule.m in Sources */,
 				8BC10E6223029CAE00209FF9 /* RNGoogleMobileRewardedDelegate.m in Sources */,
+				419B6BD626D6286900C5A077 /* RNGADMediaViewManager.m in Sources */,
+				419B6BD026D6286900C5A077 /* RNGADNativeView.m in Sources */,
+				419B6BD526D6286900C5A077 /* RNNativeAdMobUtils.m in Sources */,
+				419B6BD226D6286900C5A077 /* RNGADImageView.m in Sources */,
+				419B6BD426D6286900C5A077 /* RNGADNativeViewManager.m in Sources */,
+				419B6BD326D6286900C5A077 /* RNAdmobNativeAdsManager.m in Sources */,
+				419B6BD126D6286900C5A077 /* RNGADMediaView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

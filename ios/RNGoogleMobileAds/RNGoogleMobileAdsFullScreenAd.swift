@@ -93,6 +93,26 @@ class RNGoogleMobileAdsFullScreenAd<T>: NSObject where T : GADFullScreenPresenti
       }
       
       let paidEventHandler = {(value: GADAdValue) in
+
+        var responseInfoDict: [String: Any] = [:]
+        if let ad = ad as? GADFullScreenPresentingAd,
+          let responseInfo = (ad as? GADInterstitialAd)?.responseInfo ??
+                              (ad as? GADRewardedAd)?.responseInfo ??
+                              (ad as? GADRewardedInterstitialAd)?.responseInfo ??
+                              (ad as? GADAppOpenAd)?.responseInfo {
+            
+            let adNetworkInfo = responseInfo.loadedAdNetworkResponseInfo
+
+            responseInfoDict = [
+                "Adapter": adNetworkInfo?.adNetworkClassName as Any,
+                "Latency": adNetworkInfo?.latency as Any,
+                "Ad Source ID": adNetworkInfo?.adSourceID as Any,
+                "Ad Source Name": adNetworkInfo?.adSourceName as Any,
+                "Ad Source Instance Name": adNetworkInfo?.adSourceInstanceName as Any
+            ]
+        }
+
+
         self.sendAdEvent(
           "paid",
           requestId: requestId,
@@ -102,6 +122,7 @@ class RNGoogleMobileAdsFullScreenAd<T>: NSObject where T : GADFullScreenPresenti
             "value": value.value,
             "precision": value.precision.rawValue,
             "currency": value.currencyCode,
+            "responseInfo": responseInfoDict
           ]
         );
       };

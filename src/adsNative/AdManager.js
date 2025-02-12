@@ -8,7 +8,7 @@ async function setRequestConfiguration(config) {
 }
 
 async function openAdInspector() {
-  return RNAdmobNativeAdsManager.startInspector();
+  return RNAdmobNativeAdsManager.openAdInspector();
 }
 
 async function openDebugMenu(adUnitId) {

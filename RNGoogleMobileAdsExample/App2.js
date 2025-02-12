@@ -9,7 +9,7 @@ import {
   View,
   NativeModules,
 } from 'react-native';
-import {AdManager} from 'react-native-google-ads-admob';
+import MobileAds, {AdManager} from 'react-native-google-ads-admob';
 import {AdView} from './src/AdView';
 import List from './src/List';
 import {routes} from './src/utils';
@@ -20,21 +20,21 @@ const App = () => {
 
   useEffect(() => {
     const init = async () => {
-      const res = await AdManager.setRequestConfiguration({
-        testDeviceIds: ['9556a25b632ea4ca'],
-      });
-
-      // console.log('setRequestConfiguration', JSON.stringify(res, null, 2));
+      console.log("=========== step1");
 
       const isTest = await AdManager.isTestDevice();
-      const test = await AdManager.getDeviceId();
-      console.log('isTestDevice', test, isTest);
-
+      console.log("=========== step2");
+      
+      console.log('isTestDevice', isTest);
+      console.log("=========== step4");
+      MobileAds().initialize().then(res => console.log("initialize Ads",res)).catch(console.error);
       setLoading(false);
     };
 
     init();
   }, []);
+
+  console.log("Hello World **********************************");
 
   return (
     <SafeAreaView
