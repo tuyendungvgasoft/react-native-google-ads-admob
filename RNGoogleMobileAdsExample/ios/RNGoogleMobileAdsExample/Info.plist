@@ -61,5 +61,7 @@
 			<string>n38lu8286q.skadnetwork</string>
 		</dict>
 	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Ứng dụng của chúng tôi sử dụng thông tin này để cung cấp quảng cáo phù hợp hơn.</string>
 </dict>
 </plist>

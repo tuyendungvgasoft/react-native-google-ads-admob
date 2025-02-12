@@ -10,9 +10,6 @@ PODS:
   - GoogleMobileAdsMediationFacebook (6.16.0.0):
     - FBAudienceNetwork (= 6.16.0)
     - Google-Mobile-Ads-SDK (~> 11.0)
-  - GoogleMobileAdsMediationVungle (7.4.4.0):
-    - Google-Mobile-Ads-SDK (~> 11.0)
-    - VungleAds (= 7.4.4)
   - GoogleUserMessagingPlatform (2.6.0)
   - hermes-engine (0.74.1):
     - hermes-engine/Pre-built (= 0.74.1)
@@ -947,6 +944,8 @@ PODS:
   - React-Mapbuffer (0.74.1):
     - glog
     - React-debug
+  - react-native-tracking-transparency (0.1.2):
+    - React
   - React-nativeconfig (0.74.1)
   - React-NativeModulesApple (0.74.1):
     - glog
@@ -1202,7 +1201,6 @@ PODS:
   - RNVectorIcons (9.2.0):
     - React-Core
   - SocketRocket (0.7.0)
-  - VungleAds (7.4.4)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -1212,7 +1210,6 @@ DEPENDENCIES:
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - GoogleMobileAdsMediationFacebook
-  - GoogleMobileAdsMediationVungle
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - Jet (from `../node_modules/jet`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -1241,6 +1238,7 @@ DEPENDENCIES:
   - React-jsitracing (from `../node_modules/react-native/ReactCommon/hermes/executor/`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
+  - react-native-tracking-transparency (from `../node_modules/react-native-tracking-transparency`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -1273,10 +1271,8 @@ SPEC REPOS:
     - FBAudienceNetwork
     - Google-Mobile-Ads-SDK
     - GoogleMobileAdsMediationFacebook
-    - GoogleMobileAdsMediationVungle
     - GoogleUserMessagingPlatform
     - SocketRocket
-    - VungleAds
 
 EXTERNAL SOURCES:
   boost:
@@ -1342,6 +1338,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
+  react-native-tracking-transparency:
+    :path: "../node_modules/react-native-tracking-transparency"
   React-nativeconfig:
     :path: "../node_modules/react-native/ReactCommon"
   React-NativeModulesApple:
@@ -1404,7 +1402,6 @@ SPEC CHECKSUMS:
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   Google-Mobile-Ads-SDK: 13e6e98edfd78ad8d8a791edb927658cc260a56f
   GoogleMobileAdsMediationFacebook: 234b9cecc2f9c751567a71d035974c00e6803777
-  GoogleMobileAdsMediationVungle: d090c301d492c458986c447972808c8d9efc1439
   GoogleUserMessagingPlatform: 0c3a08353e53ce8c2feab7addd0b652cde522450
   hermes-engine: 16b8530de1b383cdada1476cf52d1b52f0692cbc
   Jet: 423274a1def279114bb142cb18e7ebd11977bc89
@@ -1432,6 +1429,7 @@ SPEC CHECKSUMS:
   React-jsitracing: dd0e541a34027b3ab668ad94cf268482ad6f82fb
   React-logger: 6070f362a1657bb53335eb1fc903d3f49fd79842
   React-Mapbuffer: 2c95cbabc3d75a17747452381e998c35208ea3ee
+  react-native-tracking-transparency: 15eb319f2b982070eb9831582af27d87badfa624
   React-nativeconfig: b0073a590774e8b35192fead188a36d1dca23dec
   React-NativeModulesApple: 61b07ab32af3ea4910ba553932c0a779e853c082
   React-perflogger: 3d31e0d1e8ad891e43a09ac70b7b17a79773003a
@@ -1458,9 +1456,8 @@ SPEC CHECKSUMS:
   RNGoogleMobileAds: 02e7962cc6aff8b379f534a5e71ce5e1857216e7
   RNVectorIcons: 5784330be9dddb5474e8b378d5f6947996c84e55
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
-  VungleAds: 7ceb822f20a6619d8d9ed6a616dacd8cc5b05036
   Yoga: 348f8b538c3ed4423eb58a8e5730feec50bce372
 
-PODFILE CHECKSUM: 177b730ffc1bf915ed53463a483815bdf2d50bec
+PODFILE CHECKSUM: 458e8ca953005189e0876574c09a3dbcec2f1ae9
 
 COCOAPODS: 1.16.2

@@ -13,6 +13,7 @@
     "react": "18.2.0",
     "react-native": "0.74.1",
     "react-native-google-ads-admob": "link:../",
+    "react-native-tracking-transparency": "^0.1.2",
     "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {

@@ -33,6 +33,7 @@ import MobileAds, {
   RewardedInterstitialAd,
   useRewardedInterstitialAd,
 } from 'react-native-google-ads-admob';
+import {requestTrackingPermission} from 'react-native-tracking-transparency';
 
 const appOpen = AppOpenAd.createForAdRequest(TestIds.APP_OPEN, {
   requestNonPersonalizedAdsOnly: true,
@@ -1033,6 +1034,10 @@ TestRegistry.registerTest(new DebugMenuTest());
 const App = () => {
   useEffect(() => {
     const init = async () => {
+      const trackingStatus = await requestTrackingPermission();
+      if (trackingStatus === 'authorized' || trackingStatus === 'unavailable') {
+        // enable tracking features
+      }
       MobileAds()
         .initialize()
         .then(res => console.log('initialize Ads', res))
