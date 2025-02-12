@@ -1047,7 +1047,7 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{backgroundColor: 'white'}}>
+    <SafeAreaView style={{backgroundColor: 'pink'}}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={{width: "80%"}}>
           <TestRunner /> 
